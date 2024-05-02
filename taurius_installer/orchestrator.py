@@ -58,4 +58,7 @@ class Orchestrator:
         self._initialize_installation()
 
     def _initialize_installation(self):
+        """Call other process to install it
+        :return:
+        """
         pass
