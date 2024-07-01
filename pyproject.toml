@@ -15,7 +15,45 @@ pywebview = "^5.1"
 flask = "^3.0.3"
 flask-socketio = "^5.3.6"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+black = "^24.4.2"
+isort = "^5.13.2"
+flake8 = "^7.1.0"
+taskipy = "^1.13.0"
+
+[tool.black]
+line-length = 80
+target-version = ["py312"]
+exclude = '''
+/(
+  \.git
+ | \.hg
+ | \.mypy_cache
+ | \.tox
+ | venv
+ | _build
+ | buck-out
+ | build
+ | \.flake8
+ )/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 80
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+lint = "black --check --diff . && isort --check --diff ."
+lint-fix = "echo \"Formmating with black\" && black . && echo \"Formmating with isort\" && isort ."
+test = "pytest -s -x -vv"
+pre_test = "task lint"
+post_test = "coverage html"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "--ignore=tasks"
