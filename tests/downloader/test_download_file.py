@@ -10,7 +10,8 @@ class TestDownloadFile(CommonTestCase):
     def setUp(self):
         self.test_filename = "TestDownload"
         self.test_url = (
-            "https://github.com/pedroaba/rotion/archive/refs/tags/v0.0.3.zip"
+            "https://firebasestorage.googleapis.com/v0/b/inspetor-database-eb605.appspot.com/o/rotion-0.0"
+            ".3.zip?alt=media&token=47c083f4-6a93-4a0f-b99d-eaed026c578b"
         )
         self.downloader = Downloader(self.test_filename)
 
