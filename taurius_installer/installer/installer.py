@@ -16,6 +16,18 @@ class Installer:
 
         self._setup_folders()
 
+    def set_origin_filepath(self, filepath: Path):
+        if not filepath.exists():
+            raise FileNotFoundError(filepath)
+
+        self._origin = filepath
+
+    def set_destity_filepath(self, filepath: Path):
+        if not filepath.exists():
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+
+        self._destiny = filepath
+
     def _setup_folders(self):
         self._origin_folder = self._origin.parent.absolute()
         self._destiny_folder = self._destiny.parent.absolute()

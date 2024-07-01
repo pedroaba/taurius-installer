@@ -3,10 +3,14 @@ from pathlib import Path
 
 from appdata import AppDataPaths
 
+from taurius_installer.installer.installer import Installer
+from taurius_installer.downloader.downloader import Downloader
+
 
 class Orchestrator:
     def __init__(
-        self, application_name: str, application_version: str = "0.0.1"
+        self, application_name: str, application_version: str = "0.0.1",
+        downloader: Downloader = None, installer: Installer = None
     ):
         self._application_name = application_name
         self._version = application_version
@@ -22,6 +26,14 @@ class Orchestrator:
         }
 
         self._must_be_install_new_version = False
+
+        if downloader is None:
+            downloader = Downloader(application_name)
+        if installer is None:
+            installer = Installer(downloader.path, self._appdata.app_data_path)
+
+        self._downloader = downloader
+        self._installer = installer
 
         self._setup_of_appdata()
         self._load_configs()
@@ -97,3 +109,10 @@ class Orchestrator:
             return True
 
         return False
+
+    def initialize_process(self, package_url: str):
+        if not self.must_be_install_new_version:
+            return
+
+        self._downloader.download_from(package_url)
+        self._installer.install()

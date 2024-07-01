@@ -1,0 +1,2 @@
+class InvalidFetchMethod(Exception):
+    pass
