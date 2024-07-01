@@ -28,7 +28,7 @@ class TestDownloadFile(CommonTestCase):
         except Exception as e:
             print(e)
 
-    def test_download_file(self):
+    def test_it_should_be_able_to_download_a_file(self):
         self.downloader.download_from(self.test_url)
         expected_downloaded_path = Path(
             f"{self.test_filename}.{self.downloader.DOWNLOAD_FILE_TYPE}"
@@ -38,7 +38,7 @@ class TestDownloadFile(CommonTestCase):
 
         self.path_to_exclude = expected_downloaded_path
 
-    def test_download_file_to_specific_path(self):
+    def test_it_should_be_able_to_download_file_to_specific_path(self):
         path_to_save_file = Path(self.test_folder_name)
 
         self.downloader.set_path_to_download(path_to_save_file)

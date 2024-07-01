@@ -33,7 +33,7 @@ class TestInstallExecutable(CommonTestCase):
         if self.installation_folder.exists():
             shutil.rmtree(self.installation_folder)
 
-    def test_install_executable_on_specified_folder(self):
+    def test_it_should_be_able_to_install_executable_on_specified_folder(self):
         self.installer.install()
         executable_folder = (
             self.installation_folder / self.executable_filepath.stem
