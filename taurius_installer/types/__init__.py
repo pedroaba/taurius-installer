@@ -7,7 +7,8 @@ class FetchMethod(Enum):
     GET = "GET"
 
 
-class FetcherResponse(TypedDict):
+class FetcherResponse[ExtraInfoType](TypedDict):
     application_name: str
     download_url: str
     version: str
+    extra_info: ExtraInfoType

@@ -18,3 +18,14 @@ class TestFetchApplicationInfoFromCloud(CommonTestCase):
             "version": "",
             "download_url": ""
         })
+
+    def test_it_should_be_able_to_get_the_app_info_with_extra_information(self):
+        response, status = self.fetcher.fetch_application_info(FetchMethod.POST)
+
+        self.assertEqual(status, 200)
+        self.assertDictContainsSubset(response, {
+            "application_name": "",
+            "version": "",
+            "download_url": "",
+            "extra_info": ""
+        })

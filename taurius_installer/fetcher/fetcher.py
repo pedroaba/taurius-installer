@@ -15,7 +15,7 @@ class Fetcher:
     def _get_auth_header(self):
         return {}
 
-    def fetch_application_info(self, method: FetchMethod) -> tuple[FetcherResponse, int]:
+    def fetch_application_info[T](self, method: FetchMethod) -> tuple[FetcherResponse[T], int]:
         auth_header = self._get_auth_header()
 
         match method:
