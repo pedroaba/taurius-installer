@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="space-y-10 w-full">
+    <h1 class="text-3xl text-slate-50 font-bold">Password Manager 1.0</h1>
+
+    <div class="w-full flex items-center gap-4">
+        <div class="w-full flex items-center justify-start border-2 rounded-md bg-slate-800 px-3 py-2 text-white flex-[3]">
+            <input type="text" name="password-name" class="w-full bg-transparent border-0 focus:outline-none text-sm" placeholder="Search by name of your password...">
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </button>
+        </div>
+        <button onclick="handleOpenModal()" class="bg-slate-800 px-3 py-2 text-white flex-1 text-center border-2 border-slate-800 rounded-md hover:bg-slate-700 text-sm">
+            Register Password
+        </button>
+    </div>
+
+    <div id="password-list" class="flex flex-col gap-4">
+
+    </div>
+</div>
+{% include 'fragments/modal/add-password.html' %}
+{% endblock content %}
+{% block extraJS %}
+<script>
+    function handleOpenModal() {
+        $("#modal").removeClass("hidden")
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const passwordNames = '{{ context.passwords }}'.split(',')
+        for (const password of passwordNames) {
+            $("#password-list").append(
+                `<div class="w-full bg-slate-600 rounded text-slate-950 font-bold p-4">${password}</div>`
+            )
+        }
+    })
+</script>
+{% endblock extraJS %}

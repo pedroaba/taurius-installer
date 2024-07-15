@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="br">
+    <head>
+        <meta charset="UTF-8">
+
+        <script src="{{ url_for('static', filename='js/tailwind/tailwindcss.config.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/tailwind/tailwindcss.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery/jquery.js') }}"></script>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-icons/icons.min.css') }}">
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            {% if context.title %}
+            {{ context.title }}
+            {% else %}
+            Password Manager App
+            {% endif %}
+        </title>
+    </head>
+    <body class="w-screen h-screen bg-slate-900 flex px-10 pt-12">
+        {% block content %}
+        {% endblock content %}
+        {% block extraJS %}
+        {% endblock extraJS %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            alert('{{ message|e }}')
+                        });
+                    </script>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </body>
+</html>

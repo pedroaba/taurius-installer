@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "python",
+            "name": "EXAMPLE PASSWORD MANAGER",
+            "file": "examples/password_manager/main.py",
+            "arguments": [],
+        },
+    ]
+}
