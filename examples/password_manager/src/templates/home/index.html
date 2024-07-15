@@ -13,9 +13,30 @@
                 </svg>
             </button>
         </div>
-        <a href="#" class="bg-slate-800 px-3 py-2 text-white flex-1 text-center border-2 border-slate-800 rounded-md hover:bg-slate-700 text-sm">
+        <button onclick="handleOpenModal()" class="bg-slate-800 px-3 py-2 text-white flex-1 text-center border-2 border-slate-800 rounded-md hover:bg-slate-700 text-sm">
             Register Password
-        </a>
+        </button>
+    </div>
+
+    <div id="password-list" class="flex flex-col gap-4">
+
     </div>
 </div>
+{% include 'fragments/modal/add-password.html' %}
 {% endblock content %}
+{% block extraJS %}
+<script>
+    function handleOpenModal() {
+        $("#modal").removeClass("hidden")
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const passwordNames = '{{ context.passwords }}'.split(',')
+        for (const password of passwordNames) {
+            $("#password-list").append(
+                `<div class="w-full bg-slate-600 rounded text-slate-950 font-bold p-4">${password}</div>`
+            )
+        }
+    })
+</script>
+{% endblock extraJS %}

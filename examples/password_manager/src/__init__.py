@@ -3,6 +3,7 @@ from flask import Flask
 from flask_session import Session
 
 from examples.password_manager.src.routes.home import HomeRoute
+from examples.password_manager.src.routes.password import PasswordManagerRoute
 from examples.password_manager.src.types import ConfigProtocol, ServerConfigProtocol
 from examples.password_manager.src.socket import socketio
 
@@ -16,7 +17,8 @@ class PasswordManagerApp:
         self._server_config = server_config
 
         self._routes = [
-            HomeRoute
+            HomeRoute,
+            PasswordManagerRoute
         ]
 
         self._initialize_app()
